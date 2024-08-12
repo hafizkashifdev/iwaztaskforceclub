@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Charifit</title>
+    <title>TFC</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -25,12 +25,11 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
+    
 
 
     <!-- header-start -->
@@ -98,11 +97,17 @@
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </nav>
+                              
+                                <!-- Trigger Button for Donation Modal -->
                                 <div class="Appointment">
                                     <div class="book_btn d-none d-lg-block">
-                                        <a data-scroll-nav='1' href="#">Make a Donate</a>
+                                        <a data-scroll-nav='1' href="#" data-toggle="modal" data-target="#donateModal">Make a Donate</a>
                                     </div>
                                 </div>
+
+                               
+
+
                             </div>
                         </div>
                         <div class="col-12">
@@ -114,7 +119,40 @@
         </div>
     </header>
     <!-- header-end -->
-
+    <div class="modal fade" id="donateModal" tabindex="-1" role="dialog" aria-labelledby="donateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donateModalLabel">Donate to Task Force Club</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="donationForm">
+                        <div class="form-group">
+                            <label for="donorName" class="slider_text ">Name</label>
+                            <input type="text" class="form-control" id="donorName" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donorEmail" class="slider_text ">Email address</label>
+                            <input type="email" class="form-control" id="donorEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donationAmount" class="slider_text ">Donation Amount</label>
+                            <input type="number" class="form-control" id="donationAmount" placeholder="Enter donation amount" required min="1">
+                        </div>
+                        <button type="submit" class="boxed-btn4">Donate</button>
+                       
+                    </form>
+                    <div id="donationMessage" style="margin-top: 20px; display: none;" class="alert alert-success slider_text ">
+                        Thank you for your donation!
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
     <!-- slider_area_start -->
     <div class="slider_area">
         <div class="single_slider  d-flex align-items-center slider_bg_1 overlay2">
@@ -224,7 +262,7 @@
                             enim minim veniam, quis nostrud exercitation. tempor 
                             incididunt  ut labore dolore magna aliqua. enim minim 
                             veniam, quis nostrud exercitation.</p>
-                        <a href="#" data-scroll-nav='1' class="boxed-btn4">Donate Now</a>
+                      
                     </div>
                 </div>
             </div>
@@ -564,7 +602,7 @@
     </div>
     <!-- news__area_end  -->
 
-    <div data-scroll-index='1' class="make_donation_area section_padding">
+   
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
@@ -623,7 +661,7 @@
 
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- footer_start  -->
     <footer class="footer">
@@ -759,6 +797,8 @@
     <!-- link that opens popup -->
 
     <!-- JS here -->
+   
+                                
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -777,6 +817,34 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/gijgo.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#donationForm').on('submit', function (event) {
+                event.preventDefault();
+                
+                // Perform simple validation
+                var isValid = true;
+                $('#donationForm input').each(function () {
+                    if ($(this).val() === '') {
+                        isValid = false;
+                        $(this).addClass('is-invalid');
+                    } else {
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+
+                if (isValid) {
+                    $('#donationMessage').show();
+                    setTimeout(function () {
+                        $('#donationMessage').fadeOut();
+                        $('#donateModal').modal('hide');
+                        $('#donationForm')[0].reset();
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+
     <!--contact js-->
     <script src="js/contact.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>
