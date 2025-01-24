@@ -2,12 +2,12 @@
 name: Deploy static content to Pages
 
 on:
+  workflow_dispatch:
   # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  # push:
+  #   branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -29,6 +29,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+     - name: Deploy to GitHub Pages
+       uses: actions/github-pages@v3
+       with:
+        ref: main
+         # Build the static content in the repository
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
